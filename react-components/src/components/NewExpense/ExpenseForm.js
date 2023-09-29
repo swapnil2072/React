@@ -39,6 +39,19 @@ const ExpenseForm = () => {
     // });
   };
 
+  //Shared handler function
+  // const inputChangeHandler = (identifier,value) =>{
+  //   if(identifier==='title'){
+  //     setEnteredTitle(value);
+  //   }
+  //   else if(identifier ==='date'){
+  //     setEnteredDate(value);
+  //   }
+  //   else{
+  //     setEnteredAmount(value);
+  //   }
+  // };
+
   return (
     <form>
       <div className='new-expense__controls'>
@@ -46,6 +59,11 @@ const ExpenseForm = () => {
           <label>Title</label>
           <input type='text' onChange={titleChangeHandler} />
         </div>
+       { /* for shared funtion 
+       <div className='new-expense__control'>
+          <label>Title</label>
+          <input type='text' onChange={(event)=>inputChangehandler('title',event.target.value)} />
+        </div> */}
         <div className='new-expense__control'>
           <label>Amount</label>
           <input
