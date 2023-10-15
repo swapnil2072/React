@@ -7,11 +7,12 @@ const initialUserInput = {
   duration: 0,
 };
 
-const UserInput = () => {
+const UserInput = (props) => {
   const [userInput, setUserInput] = useState(initialUserInput);
 
   const submitHandler = (event) => {
     event.preventDefault();
+    props.onCalculate(userInput)
   };
 
   const resetHandler = () => {
@@ -21,7 +22,7 @@ const UserInput = () => {
   const inputChangeHandler = (input, value) => {
     setUserInput((prevInput) => {
       return {
-        ...prev,
+        ...prevInput,
         [input]: value,
       };
     });
