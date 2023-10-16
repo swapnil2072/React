@@ -11,8 +11,9 @@ function App() {
     // You might not directly want to bind it to the submit event on the form though...
     setUserInput(userInput);
   };
+  const yearlyData = [];
   if (userInput) {
-    const yearlyData = []; // per-year results
+    // per-year results
 
     let currentSavings = +userInput["current-savings"]; // feel free to change the shape of this input object!
     const yearlyContribution = +userInput["yearly-contribution"]; // as mentioned: feel free to change the shape...
@@ -38,11 +39,15 @@ function App() {
       <Header />
 
       <UserInput onCalculate={calculateHandler} />
-
       {/* Todo: Show below table conditionally (only once result data is available) */}
       {/* Show fallback text if no data is available */}
-
-      <ResultTable />
+      {!userInput && <p>No investment calculated yet.</p>}
+      {userInput && (
+        <ResultTable
+          data={yearlyData}
+          initialInvestment={userInput["current-savings"]}
+        />
+      )}
     </div>
   );
 }
