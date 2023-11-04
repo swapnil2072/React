@@ -4,7 +4,10 @@ import CoreConcepts from "./components/CoreConcepts";
 import TabButton from "./components/TabButton";
 
 function App() {
-  function handleSelect(selectedButton) {}
+  const [selectedTopic, setSelectedTopic] = useState("please click a button");
+  function handleSelect(selectedButton) {
+    setSelectedTopic(selectedButton);
+  }
   return (
     <div>
       <Header></Header>
@@ -28,16 +31,13 @@ function App() {
             <TabButton onSelect={() => handleSelect("components")}>
               Components
             </TabButton>
-            <TabButton onSelect={() => handleSelect("JSX")}>
-              JSX
-            </TabButton>
-            <TabButton onSelect={() => handleSelect("props")}>
-              Props
-            </TabButton>
-            <TabButton onSelect={() => handleSelect("state")}>
+            <TabButton onSelect={() => handleSelect("JSX")}>JSX</TabButton>
+            <TabButton onSelect={() => handleSelect("props")}>Props</TabButton>
+            <TabButton onSelect={() => handleSelect("state  ")}>
               State
             </TabButton>
           </menu>
+          {selectedTopic}
         </section>
       </main>
     </div>
