@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import Places from "./components/Places.jsx";
 import { AVAILABLE_PLACES } from "./data.js";
@@ -16,7 +16,7 @@ function App() {
   const modal = useRef();
   const selectedPlace = useRef();
   const [availablePlaces, setAvailablePlaces] = useState([]);
-  const [pickedPlaces, setPickedPlaces] = useState([]);
+  const [pickedPlaces, setPickedPlaces] = useState(storedPlaces);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -25,9 +25,10 @@ function App() {
         position.coords.latitude,
         position.coords.longitude,
       );
+
       setAvailablePlaces(sortedPlaces);
     });
-  });
+  }, []);
 
   function handleStartRemovePlace(id) {
     modal.current.open();
@@ -35,7 +36,12 @@ function App() {
   }
 
   function handleStopRemovePlace() {
-    modal.current.close();
+    <Modal open={modalIsOpen} onClose={handleStopRemovePlace}>
+      <DeleteConfirmation
+        onCancel={handleStopRemovePlace}
+        onConfirm={handleRemovePlace}
+      />
+    </Modal>;
   }
 
   function handleSelectPlace(id) {
@@ -46,9 +52,9 @@ function App() {
       const place = AVAILABLE_PLACES.find((place) => place.id === id);
       return [place, ...prevPickedPlaces];
     });
+
     const storedIds = JSON.parse(localStorage.getItem("selectedPlaces")) || [];
     if (storedIds.indexOf(id) === -1) {
-      //localStorage is provided by browser to store some data
       localStorage.setItem(
         "selectedPlaces",
         JSON.stringify([id, ...storedIds]),
@@ -61,6 +67,7 @@ function App() {
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current),
     );
     modal.current.close();
+
     const storedIds = JSON.parse(localStorage.getItem("selectedPlaces")) || [];
     localStorage.setItem(
       "selectedPlaces",
@@ -95,7 +102,7 @@ function App() {
         <Places
           title="Available Places"
           places={availablePlaces}
-          fallbackText="Sorting places by distance"
+          fallbackText="Sorting places by distance..."
           onSelectPlace={handleSelectPlace}
         />
       </main>
