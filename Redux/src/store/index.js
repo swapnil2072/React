@@ -4,7 +4,7 @@ const initialCounterState = { counter: 0, showCounter: true };
 
 const counterSlice = createSlice({
   name: "counter",
-  initialCounterState,
+  initialState:initialCounterState,
   reducers: {
     increment(state) {
       state.counter++;
@@ -28,7 +28,7 @@ const initialAuthState = {
 const authSlice = createSlice({
   name: "authentication",
   initialState: initialAuthState,
-  reducer: {
+  reducers: {
     login(state) {
       state.isAuthenticated = true;
     },
