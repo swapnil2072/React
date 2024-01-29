@@ -7,22 +7,23 @@ import EventItem from "./EventItem";
 
 export default function FindEventSection() {
   const searchElement = useRef();
-  const [searchTerm, setSearchTem] = useState("");
+  const [searchTerm, setSearchTerm] = useState();
 
-  const { data, isPending, isError, error } = useQuery({
-    queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }),
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["events", { search: searchTerm }],
+    queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }),
+    enabled: searchTerm !== undefined,
   });
 
   function handleSubmit(event) {
     event.preventDefault();
-    setSearchTem(searchElement.current.value);
+    setSearchTerm(searchElement.current.value);
   }
 
   let content = <p>Please enter a search term and to find events.</p>;
 
-  if (isPending) {
-    content = <LoadingIndicator></LoadingIndicator>;
+  if (isLoading) {
+    content = <LoadingIndicator />;
   }
 
   if (isError) {
@@ -59,7 +60,7 @@ export default function FindEventSection() {
           <button>Search</button>
         </form>
       </header>
-      <p>{content}</p>
+      <>{content}</>
     </section>
   );
 }
