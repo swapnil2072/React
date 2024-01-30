@@ -5,7 +5,7 @@ import EventItem from "./EventItem.jsx";
 import { fetchEvents } from "../../util/http.js";
 
 export default function NewEventsSection() {
-  const { data, isPending, isError, error, refetch } = useQuery({
+  const { data, isPending, isError, error } = useQuery({
     queryKey: ["events"],
     queryFn: fetchEvents,
     staleTime: 5000,
