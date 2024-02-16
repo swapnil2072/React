@@ -311,10 +311,7 @@ main {
   width: 30rem;
   max-width: 90%;
   z-index: 10;
-  animation: slide-up-fade-in;
-  animation-duration: 0.3s;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
+
 }
 
 
