@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AnimatePresence, animate, motion } from "framer-motion";
+import { AnimatePresence,  motion } from "framer-motion";
 import { ChallengesContext } from "../store/challenges-context.jsx";
 
 export default function ChallengeItem({
