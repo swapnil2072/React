@@ -9,10 +9,10 @@ function Tab({ isSelected, onSelect, badgeCaption, children }) {
         onClick={onSelect}
       >
         {children}
-        <Badge caption={badgeCaption}></Badge>
+        <Badge key={badgeCaption} caption={badgeCaption}></Badge>
       </button>
       {isSelected && (
-        <motion.div layoutId="tab-indicator" className="active-tab-indicator" />
+        <motion.div layoutId="tab-indicator" className="active-tab-indicator" /> //adding layoutId make it enable to perform smooth animation on shared elements
       )}
     </li>
   );
