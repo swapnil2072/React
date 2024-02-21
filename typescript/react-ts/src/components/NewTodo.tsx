@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 const NewTodo: React.FC<{ onAddTodo: (text: string) => void }> = (props) => {
     const todoTextInputRef = useRef<HTMLInputElement>(null);
     const submitHandler = (event: React.FormEvent) => {
-        event?.preventDefault();
+        event.preventDefault();
         const enteredText = todoTextInputRef.current!.value;
         if (enteredText.trim().length === 0) {
             return;
@@ -12,10 +12,10 @@ const NewTodo: React.FC<{ onAddTodo: (text: string) => void }> = (props) => {
     };
 
     return (
-        <form action="" onSubmit={submitHandler}>
+        <form onSubmit={submitHandler}>
             <label htmlFor="text">Todo Text</label>
             <input type="text" id="text" ref={todoTextInputRef} />
-            <button type="button">Add Todo</button>
+            <button>Add Todo</button>
         </form>
     );
 };
