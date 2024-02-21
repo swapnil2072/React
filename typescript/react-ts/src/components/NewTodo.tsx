@@ -1,20 +1,20 @@
 import React, { useRef } from "react";
 
-const NewTodo = () => {
+const NewTodo: React.FC<{ onAddTodo: (text: string) => void }> = (props) => {
     const todoTextInputRef = useRef<HTMLInputElement>(null);
     const submitHandler = (event: React.FormEvent) => {
         event?.preventDefault();
         const enteredText = todoTextInputRef.current!.value;
-        if(enteredText.trim().length===0){
-            return ;
+        if (enteredText.trim().length === 0) {
+            return;
         }
-        
+        props.onAddTodo(enteredText);
     };
 
     return (
         <form action="" onSubmit={submitHandler}>
             <label htmlFor="text">Todo Text</label>
-            <input type="text" id="text" ref={todoTextInputRef}   />
+            <input type="text" id="text" ref={todoTextInputRef} />
             <button type="button">Add Todo</button>
         </form>
     );
